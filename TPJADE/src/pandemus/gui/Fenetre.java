@@ -13,9 +13,9 @@ public class Fenetre extends JFrame implements ActionListener{
 	Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 	int screenX = (int) (tailleEcran.getWidth() - tailleEcran.getWidth()/4);
 	int screenY = (int) (tailleEcran.getHeight() - tailleEcran.getHeight()/4);
-	public String name = "John Smith";
+	String name = "John Smith";
 	public boolean veutCreerAgent = false;
-	public boolean veutEnvoyer = false;
+	public String texte = "";
 	/*
 	 *  Pages de la fenêtre
 	 */
@@ -35,7 +35,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	 * Zone de texte
 	 */
 	JTextArea enterName = new JTextArea("");
-	public JTextArea enterChat = new JTextArea("");
+	JTextArea enterChat = new JTextArea("");
 	
 	/*
 	 * Chat
@@ -67,9 +67,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	
 	public StringBuilder createAgent () {
 		var lesAgents = new StringBuilder();
-		lesAgents.append(name + ":pandemus.agents.TestAgent;");
-		lesAgents.append("tommy:pandemus.agents.TestAgent;");
-		lesAgents.append("shelby:pandemus.agents.TestAgent;");
+		lesAgents.append(name + ":pandemus.agents.NewAgent;");
 		return lesAgents;
 	}
 	
@@ -85,6 +83,7 @@ public class Fenetre extends JFrame implements ActionListener{
 		}
 		chat[0] = "<"+user+"> "+msg;
 		System.out.println("Got new message from " +user+ ":" +msg);
+		updateFenetre();
 	}
 		
 	public void updateFenetre() {
@@ -193,11 +192,9 @@ public class Fenetre extends JFrame implements ActionListener{
 		
 		if (source == sendButton) {
 			if (!(enterChat.getText() == null) && !(enterChat.getText().isEmpty())) {
-				veutEnvoyer = true;
-				System.out.println("J'ai envoyé une demande");
+				texte = enterChat.getText();
+				newMsg(texte,name);
 			}
-			//newMsg(enterChat.getText(),name);
-			
 		}
 		
 		if (source == quitButton) {
