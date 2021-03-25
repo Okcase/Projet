@@ -14,6 +14,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	int screenX = (int) (tailleEcran.getWidth() - tailleEcran.getWidth()/4);
 	int screenY = (int) (tailleEcran.getHeight() - tailleEcran.getHeight()/4);
 	String name = "John Smith";
+	public boolean veutCreerAgent = false;
 	/*
 	 *  Pages de la fenêtre
 	 */
@@ -60,8 +61,15 @@ public class Fenetre extends JFrame implements ActionListener{
 		this.setLocation((int)(tailleEcran.getWidth() / 2) - screenX/2,(int) (tailleEcran.getHeight() / 2) - screenY/2);
 		this.updateFenetre();
 		
-		_title = true;
-		_chat = false;
+		
+	}
+	
+	public StringBuilder createAgent () {
+		var lesAgents = new StringBuilder();
+		lesAgents.append(name + ":pandemus.agents.TestAgent;");
+		lesAgents.append("tommy:pandemus.agents.TestAgent;");
+		lesAgents.append("shelby:pandemus.agents.TestAgent;");
+		return lesAgents;
 	}
 	
 	public void initMsg() {
@@ -166,12 +174,13 @@ public class Fenetre extends JFrame implements ActionListener{
 			_title = false;
 			_chat = true;
 			initMsg();
+			veutCreerAgent = true;
 		}
 		
 		if (source == nameButton) {
 			String newName = enterName.getText();
-				if (newName.length() > 20) {
-					newName = newName.substring(0,20);
+				if (newName.length() > 17) {
+					newName = newName.substring(0,17);
 				}
 				name = newName;
 		}

@@ -13,6 +13,18 @@ import jade.lang.acl.ACLMessage;
 
 
 public class TestAgent extends Agent {
+	public Queue<String> queue = new LinkedList<String>();
+    
+    public void stackMessage (String message) {
+        queue.offer(message);
+    }
+    
+    public void receiveMessage () {
+        while (!queue.isEmpty()) {
+            System.out.println(queue.poll());
+        }
+    }
+
 	
 	protected void setup() {
 		
@@ -32,7 +44,7 @@ public class TestAgent extends Agent {
 			addBehaviour(new CyclicBehaviour() {
 				public void action() {
 					String message = scan.nextLine();
-					queue.offer(message);
+					stackMessage(message);
 					msg.setContent(message);
 					if (!message.isEmpty())
 						myAgent.send(msg);
@@ -42,9 +54,7 @@ public class TestAgent extends Agent {
 			// Ajoute un Behaviour pour recevoir les messages du topic
 			addBehaviour(new CyclicBehaviour(this) {
 				public void action() {
-					while (!queue.isEmpty()) {
-						System.out.println(queue.poll());
-					}
+					receiveMessage();
 				} 
 			});
 		} catch (ServiceException e) {
