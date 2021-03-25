@@ -32,7 +32,7 @@ public class LaunchTopicAgent {
 				f.veutCreerAgent = false;
 				createdAgent = true;
 			}
-			System.out.println(" ");
+			System.out.println("");
 		}
 	
 		prop.setProperty(Profile.AGENTS, agent.toString());
@@ -42,8 +42,16 @@ public class LaunchTopicAgent {
 				
 		Runtime.instance().createMainContainer(pMain);
 		
-		/*while (true) {
-			prop.queue.isEmpty();
-		}*/
+		while (true) {
+			boolean demandeDenvoi = f.veutEnvoyer;
+			
+			if (demandeDenvoi) {
+				System.out.println("J'ai reçu la demande");
+				f.newMsg(f.enterChat.getText(),f.name);
+				//agent.
+				f.veutEnvoyer = false;
+			}
+			System.out.println("");
+		}
 	}
 }

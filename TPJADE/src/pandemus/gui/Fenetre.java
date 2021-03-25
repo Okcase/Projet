@@ -13,8 +13,9 @@ public class Fenetre extends JFrame implements ActionListener{
 	Dimension tailleEcran = Toolkit.getDefaultToolkit().getScreenSize();
 	int screenX = (int) (tailleEcran.getWidth() - tailleEcran.getWidth()/4);
 	int screenY = (int) (tailleEcran.getHeight() - tailleEcran.getHeight()/4);
-	String name = "John Smith";
+	public String name = "John Smith";
 	public boolean veutCreerAgent = false;
+	public boolean veutEnvoyer = false;
 	/*
 	 *  Pages de la fenêtre
 	 */
@@ -34,7 +35,7 @@ public class Fenetre extends JFrame implements ActionListener{
 	 * Zone de texte
 	 */
 	JTextArea enterName = new JTextArea("");
-	JTextArea enterChat = new JTextArea("");
+	public JTextArea enterChat = new JTextArea("");
 	
 	/*
 	 * Chat
@@ -191,8 +192,12 @@ public class Fenetre extends JFrame implements ActionListener{
 		}
 		
 		if (source == sendButton) {
-			if (!(enterChat.getText() == null) && !(enterChat.getText().isEmpty()))
-				newMsg(enterChat.getText(),name);
+			if (!(enterChat.getText() == null) && !(enterChat.getText().isEmpty())) {
+				veutEnvoyer = true;
+				System.out.println("J'ai envoyé une demande");
+			}
+			//newMsg(enterChat.getText(),name);
+			
 		}
 		
 		if (source == quitButton) {

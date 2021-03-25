@@ -24,7 +24,16 @@ public class TestAgent extends Agent {
             System.out.println(queue.poll());
         }
     }
-
+    
+    public void sendMessage(String msgToSend) {
+    	ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+    	String message = msgToSend;
+		stackMessage(message);
+		msg.setContent(message);
+		if (!message.isEmpty()) {}
+			//myAgent.send(msg);
+    	
+    }
 	
 	protected void setup() {
 		
@@ -41,7 +50,7 @@ public class TestAgent extends Agent {
 			msg.addReceiver(topic);
 			
 			// Ajoute un Behaviour pour envoyer les messages sur le topic
-			addBehaviour(new CyclicBehaviour() {
+			addBehaviour(new CyclicBehaviour(this) {
 				public void action() {
 					String message = scan.nextLine();
 					stackMessage(message);
@@ -57,6 +66,7 @@ public class TestAgent extends Agent {
 					receiveMessage();
 				} 
 			});
+			
 		} catch (ServiceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
